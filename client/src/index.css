@@ -1,76 +1,169 @@
-  :root {
-    font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-    line-height: 1.5;
-    font-weight: 400;
+:root {
+  --bg: #fafafa;
+  --text: #1a1a1a;
+  --border: #ccc;
+  --panel: #ffffff;
+  --font-primary: 'Inter', system-ui, sans-serif;
+  --control-bg: #f5f5f5;
+  --slider-bg: #ddd;
+  --thumb-bg: #111;
+  --overlay-bg: rgba(255, 255, 255, 0.9);
+}
 
-    color-scheme: light dark;
-    color: rgba(255, 255, 255, 0.87);
-    background-color: #242424;
+* {
+  box-sizing: border-box;
+}
 
-    font-synthesis: none;
-    text-rendering: optimizeLegibility;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-  }
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  font-family: var(--font-primary);
+  background: var(--bg);
+  color: var(--text);
+  overflow: hidden;
+}
 
-  a {
-    font-weight: 500;
-    color: #646cff;
-    text-decoration: inherit;
-  }
+.app {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
 
-  a:hover {
-    color: #535bf2;
-  }
+.topbar {
+  height: 48px;
+  display: flex;
+  align-items: center;
+  padding: 0 1rem;
+  background: var(--bg);
+  border-bottom: 1px solid var(--border);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 10;
+}
 
-  body {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: system-ui, sans-serif;
-  }
+.logo {
+  font-size: 1.4rem;
+  font-weight: 600;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+}
 
-  .app {
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
+.layout {
+  display: flex;
+  flex: 1;
+  padding-top: 48px;
+}
 
-  .header {
-    height: 20vh;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    max-width: 600px;
-  }
+.sidebar {
+  width: 300px;
+  background: var(--panel);
+  border-right: 1px solid var(--border);
+  padding: 2rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  overflow-y: auto;
+}
 
-  .preview {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
+.control-panel {
+  background: var(--control-bg);
+  padding: 1rem;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
 
-  h1 {
-    font-size: 2.4em;
-  }
+.control-panel label {
+  font-size: 0.9rem;
+  font-weight: 500;
+}
 
-  .preview {
-    margin-top: 0.5em;
-  }
+.range-slider,
+.file-input {
+  width: 100%;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  font-size: 0.9rem;
+  padding: 0.5rem;
+  background: var(--panel);
+}
 
-  .preview img {
-    max-width: 100%;
-    max-height: 70vh;
-    object-fit: contain;
-  }
+.range-slider {
+  appearance: none;
+  height: 6px;
+  padding: 0;
+  background: var(--slider-bg);
+  accent-color: var(--thumb-bg);
+}
 
-  @media (prefers-color-scheme: light) {
-    :root {
-      color: #213547;
-      background-color: #ffffff;
-    }
-    a:hover {
-      color: #747bff;
-    }
-  }
+.range-slider::-webkit-slider-thumb {
+  appearance: none;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--thumb-bg);
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.range-slider::-webkit-slider-thumb:hover {
+  transform: scale(1.2);
+}
+
+.canvas-area {
+  flex-grow: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(to bottom, var(--bg), var(--panel));
+  position: relative;
+  overflow: hidden;
+}
+
+.overlay-toggle {
+  position: absolute;
+  top: 1rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 5;
+  padding: 0.5rem 1.25rem;
+  font-size: 0.9rem;
+  background: var(--re);
+  border: 1px solid var(--border);
+  border-radius: 9999px;
+  box-shadow: 0 2px 6px var(--border);
+  cursor: pointer;
+}
+
+.overlay-toggle:hover {
+  background: var(--panel);
+}
+
+.original-image,
+.canvas-wrapper {
+  max-width: 100%;
+  max-height: 100vh;
+  padding: 2em;
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  object-fit: contain;
+}
+
+.visible {
+  opacity: 1;
+  pointer-events: auto;
+  z-index: 1;
+}
+
+.hidden {
+  opacity: 0;
+  pointer-events: none;
+  z-index: 0;
+  user-select: none;
+}
