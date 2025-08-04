@@ -75,8 +75,31 @@ function App() {
 
   return (
     <div className="app">
+
       <header className="topbar">
-        <h1 className="logo">PRISM</h1>
+        <div className="logo">PRISM</div>
+        <nav className="auth-links">
+          <button type="button" className="auth-button">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="auth-icon"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              strokeWidth={2}
+              width="20"
+              height="20"
+              aria-hidden="true"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zM6 20v-1a4 4 0 014-4h4a4 4 0 014 4v1"
+              />
+            </svg>
+            Sign In
+          </button>
+        </nav>
       </header>
 
       <div className="layout">
