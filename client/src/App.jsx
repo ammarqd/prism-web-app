@@ -76,7 +76,7 @@ function App() {
   return (
     <div className="app">
       <header className="topbar">
-        <div className="logo">PRISM</div>
+        <h1 className="logo">PRISM</h1>
       </header>
 
       <div className="layout">
