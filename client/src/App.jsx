@@ -1,16 +1,35 @@
 import { useState, useRef, useEffect } from 'react'
 import fx from 'glfx'
 
+function LoginModal({ isOpen, onClose }) {
+  if (!isOpen) return null
+
+  return (
+    <div className="modal-overlay">
+      <div className="modal">
+        <h2 className="modal-title">Sign In</h2>
+        <input className="modal-input" type="email" placeholder="Email" />
+        <input className="modal-input" type="password" placeholder="Password" />
+        <div className="modal-actions">
+          <button className="modal-button" onClick={onClose}>Cancel</button>
+          <button className="modal-button primary">Login</button>
+        </div>
+      </div>
+    </div>
+  )
+}
+
 function App() {
   const [image, setImage] = useState(null)
   const [showOriginal, setShowOriginal] = useState(false)
-  const [filters, setFilters] = useState({ 
-    brightness: 0, 
-    contrast: 0, 
-    saturation: 0 
+  const [filters, setFilters] = useState({
+    brightness: 0,
+    contrast: 0,
+    saturation: 0
   })
   const [canvas, setCanvas] = useState(null)
   const [texture, setTexture] = useState(null)
+  const [isLoginOpen, setIsLoginOpen] = useState(false)
   const canvasRef = useRef(null)
 
   const handleImageChange = (e) => {
@@ -32,7 +51,7 @@ function App() {
     }).catch((err) => {
       console.error('Image decode failed:', err)
     })
-  } 
+  }
 
   const createFilteredCanvas = (img, brightnessValue, contrastValue, saturationValue) => {
     const newCanvas = fx.canvas()
@@ -75,11 +94,14 @@ function App() {
 
   return (
     <div className="app">
-
       <header className="topbar">
         <div className="logo">PRISM</div>
         <nav className="auth-links">
-          <button type="button" className="auth-button">
+          <button 
+            type="button" 
+            className="auth-button"
+            onClick={() => setIsLoginOpen(true)}
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="auth-icon"
@@ -104,22 +126,22 @@ function App() {
 
       <div className="layout">
         <aside className="sidebar">
-          <input 
-            className="file-input" 
-            type="file" 
-            accept="image/*" 
-            onChange={handleImageChange} 
+          <input
+            className="file-input"
+            type="file"
+            accept="image/*"
+            onChange={handleImageChange}
           />
 
           <>
             <div className="control-panel">
               <label>Brightness</label>
-              <input 
+              <input
                 className="range-slider"
-                type="range" 
-                min="-0.5" 
-                max="0.5" 
-                step="0.1" 
+                type="range"
+                min="-0.5"
+                max="0.5"
+                step="0.1"
                 value={filters.brightness}
                 onChange={(e) => handleFilterChange('brightness', e.target.value)}
                 disabled={showOriginal}
@@ -128,12 +150,12 @@ function App() {
 
             <div className="control-panel">
               <label>Contrast</label>
-              <input 
+              <input
                 className="range-slider"
-                type="range" 
-                min="-1" 
-                max="1" 
-                step="0.1" 
+                type="range"
+                min="-1"
+                max="1"
+                step="0.1"
                 value={filters.contrast}
                 onChange={(e) => handleFilterChange('contrast', e.target.value)}
                 disabled={showOriginal}
@@ -142,12 +164,12 @@ function App() {
 
             <div className="control-panel">
               <label>Saturation</label>
-              <input 
+              <input
                 className="range-slider"
-                type="range" 
-                min="-1" 
-                max="1" 
-                step="0.1" 
+                type="range"
+                min="-1"
+                max="1"
+                step="0.1"
                 value={filters.saturation}
                 onChange={(e) => handleFilterChange('saturation', e.target.value)}
                 disabled={showOriginal}
@@ -159,7 +181,7 @@ function App() {
         <main className="canvas-area">
           {image && (
             <>
-              <button 
+              <button
                 className="overlay-toggle"
                 onMouseDown={() => setShowOriginal(true)}
                 onMouseUp={() => setShowOriginal(false)}
@@ -168,19 +190,21 @@ function App() {
                 Hold to Show Original
               </button>
 
-              <img 
-                src={image.url} 
-                alt="original" 
-                className={`image-display original-image ${showOriginal ? 'visible' : 'hidden'}`} 
+              <img
+                src={image.url}
+                alt="original"
+                className={`image-display original-image ${showOriginal ? 'visible' : 'hidden'}`}
               />
-              <div 
-                ref={canvasRef} 
+              <div
+                ref={canvasRef}
                 className={`canvas-wrapper ${showOriginal ? 'hidden' : 'visible'}`}
               ></div>
             </>
           )}
         </main>
       </div>
+
+      <LoginModal isOpen={isLoginOpen} onClose={() => setIsLoginOpen(false)} />
     </div>
   )
 }
