@@ -131,7 +131,6 @@ html, body {
   border: none;
 }
 
-
 .logo {
   font-size: 1.2rem;
   font-weight: 600;
@@ -214,19 +213,81 @@ html, body {
   overflow: hidden;
 }
 
+.upload-placeholder {
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  width: 80%;
+  max-width: 500px;
+  height: 280px;
+  background: rgba(245, 245, 245, 0.85);
+  border: 1.5px dashed var(--border);
+  border-radius: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  text-align: center;
+  transition: background 0.2s ease, border-color 0.2s ease;
+  z-index: 1;
+  padding: 2rem;
+  backdrop-filter: blur(2px);
+}
+
+.upload-placeholder:hover {
+  background: rgba(240, 240, 240, 0.95);
+  border-color: #999;
+}
+
+.upload-icon {
+  stroke: var(--thumb-bg);
+  margin-bottom: 1rem;
+}
+
+.upload-text {
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--text);
+  margin: 0;
+}
+
+.upload-subtext {
+  font-size: 0.85rem;
+  color: #666;
+  margin-top: 0.25rem;
+}
+
+@keyframes fadeSlideDown {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -10px);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
+}
+
+
 .overlay-toggle {
   position: absolute;
   top: 1rem;
   left: 50%;
-  transform: translateX(-50%);
+  transform: translate(-50%, 0); /* Default position */
   z-index: 5;
   padding: 0.5rem 1.25rem;
   font-size: 0.9rem;
-  background: var(--re);
+  background: white;
   border: 1px solid var(--border);
   border-radius: 9999px;
   box-shadow: 0 2px 6px var(--border);
   cursor: pointer;
+  opacity: 1; /* default visible state */
+}
+
+.fade-slide-down {
+  animation: fadeSlideDown 0.2s ease-out;
 }
 
 .overlay-toggle:hover {
@@ -237,7 +298,7 @@ html, body {
 .canvas-wrapper {
   max-width: 100%;
   max-height: 100vh;
-  padding: 2em;
+  padding: 6em 0;
   position: absolute;
   inset: 0;
   margin: auto;

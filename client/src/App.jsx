@@ -31,6 +31,7 @@ function App() {
   const [texture, setTexture] = useState(null)
   const [isLoginOpen, setIsLoginOpen] = useState(false)
   const canvasRef = useRef(null)
+  const fileInputRef = useRef(null)
 
   const handleImageChange = (e) => {
     const file = e.target.files[0]
@@ -126,12 +127,6 @@ function App() {
 
       <div className="layout">
         <aside className="sidebar">
-          <input
-            className="file-input"
-            type="file"
-            accept="image/*"
-            onChange={handleImageChange}
-          />
 
           <>
             <div className="control-panel">
@@ -179,16 +174,49 @@ function App() {
         </aside>
 
         <main className="canvas-area">
+
+          <input
+            ref={fileInputRef}
+            type="file"
+            accept="image/*"
+            style={{ display: 'none' }}
+            onChange={handleImageChange}
+          />
+
+          {!image && (
+            <div className="upload-placeholder" onClick={() => fileInputRef.current?.click()}>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="upload-icon"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                strokeWidth={1.5}
+                width="48"
+                height="48"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M4 16v2a2 2 0 002 2h12a2 2 0 002-2v-2M12 12v6m0-6l-3 3m3-3l3 3m0-6V6a2 2 0 00-2-2H9a2 2 0 00-2 2v6"
+                />
+              </svg>
+              <p className="upload-text">Click or tap to upload an image</p>
+              <p className="upload-subtext">JPG, PNG, or GIF — max 5MB</p>
+            </div>
+          )}
+
           {image && (
             <>
               <button
-                className="overlay-toggle"
+                className="overlay-toggle fade-slide-down"
                 onMouseDown={() => setShowOriginal(true)}
                 onMouseUp={() => setShowOriginal(false)}
                 onMouseLeave={() => setShowOriginal(false)}
               >
                 Hold to Show Original
               </button>
+
 
               <img
                 src={image.url}
