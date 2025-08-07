@@ -8,6 +8,9 @@
   --slider-bg: #ddd;
   --thumb-bg: #111;
   --overlay-bg: rgba(255, 255, 255, 0.9);
+  --red: #ff3b30;
+  --green: #34c759;
+  --blue: #007aff;
 }
 
 * {
@@ -156,20 +159,6 @@ html, body {
   border-radius: 12px;
 }
 
-.rgb-panel {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-}
-
-.rgb-label {
-  font-size: 0.85rem;
-  font-weight: 500;
-  color: #333;
-  margin-bottom: -0.3rem;
-  margin-top: 0.3rem;
-}
-
 .control-panel {
   background: var(--control-bg);
   padding: 1rem;
@@ -185,111 +174,108 @@ html, body {
   font-weight: 500;
 }
 
-.range-slider,
-.file-input {
-  width: 100%;
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  font-size: 0.9rem;
-  padding: 0.5rem;
-  background: var(--panel);
+/* RGB Panel Specific Styles */
+.rgb-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
 }
 
-.range-slider {
-  appearance: none;
-  height: 6px;
-  padding: 0;
-  background: var(--slider-bg);
-  accent-color: var(--thumb-bg);
-}
-
-.range-slider::-webkit-slider-thumb {
-  appearance: none;
-  width: 14px;
-  height: 14px;
-  border-radius: 50%;
-  background: var(--thumb-bg);
-  cursor: pointer;
-  transition: transform 0.2s;
-}
-
-.range-slider::-webkit-slider-thumb:hover {
-  transform: scale(1.2);
-}
-
-/* Red slider gradient track */
-input.range-slider.red {
-  background: linear-gradient(to right, #000000, #ff0000);
-}
-
-/* Green slider gradient track */
-input.range-slider.green {
-  background: linear-gradient(to right, #000000, #00ff00);
-}
-
-/* Blue slider gradient track */
-input.range-slider.blue {
-  background: linear-gradient(to right, #000000, #0000ff);
-}
-
-/* Basic slider styling to remove default appearance and add custom track height */
-.range-slider {
-  -webkit-appearance: none;
-  width: 100%;
-  height: 6px;
-  border-radius: 3px;
-  outline: none;
+.rgb-heading {
   margin: 0;
-  padding: 0;
+  font-size: 0.9rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  color: var(--text);
 }
 
-/* For WebKit browsers (Chrome, Safari) */
-.range-slider::-webkit-slider-thumb {
+.slider-group {
+  width: 100%;
+}
+
+.slider-row {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  width: 100%;
+}
+
+.rgb-label {
+  font-size: 0.9rem;
+  font-weight: 600;
+  width: 1rem;
+  text-align: center;
+  color: var(--text);
+}
+
+.rgb-value {
+  font-size: 0.85rem;
+  font-family: monospace;
+  font-weight: 500;
+  width: 3rem;
+  text-align: center;
+  background: var(--panel);
+  border-radius: 4px;
+  border: 1px solid var(--border);
+}
+
+/* Custom Range Slider Styles */
+.range-slider {
   -webkit-appearance: none;
-  appearance: none;
-  width: 14px;
-  height: 14px;
-  border-radius: 50%;
-  background: var(--thumb-bg);
-  cursor: pointer;
-  transition: transform 0.2s;
-  margin-top: -4px; /* center the thumb vertically */
-  position: relative;
-  z-index: 2;
-}
-.range-slider::-webkit-slider-thumb:hover {
-  transform: scale(1.2);
-}
-
-/* For Firefox */
-.range-slider::-moz-range-thumb {
-  width: 14px;
-  height: 14px;
-  border-radius: 50%;
-  cursor: pointer;
-  transition: transform 0.2s;
-  position: relative;
-  z-index: 2;
-}
-.range-slider::-moz-range-thumb:hover {
-  transform: scale(1.2);
-}
-
-/* Remove default track styling for Firefox */
-.range-slider::-moz-range-track {
-  height: 6px;
-  border-radius: 3px;
-  background: transparent; /* we set background on input itself */
-}
-
-/* Optional: for IE */
-.range-slider::-ms-track {
-  height: 6px;
-  border-radius: 3px;
+  width: 100%;
+  height: 10px;
   background: transparent;
-  border-color: transparent;
-  color: transparent;
+  flex-grow: 1;
 }
+
+.range-slider:focus {
+  outline: none;
+}
+
+/* Track styles */
+.range-slider::-webkit-slider-runnable-track {
+  width: 100%;
+  height: 4px;
+  cursor: pointer;
+  background: var(--slider-bg);
+  border-radius: 4px;
+}
+
+.range-slider::-moz-range-track {
+  width: 100%;
+  height: 4px;
+  cursor: pointer;
+  background: var(--slider-bg);
+  border-radius: 4px;
+}
+
+/* RGB-specific track colors */
+.range-slider.red::-webkit-slider-runnable-track {
+  background: linear-gradient(to right, #000, var(--red));
+}
+.range-slider.green::-webkit-slider-runnable-track {
+  background: linear-gradient(to right, #000, var(--green));
+}
+.range-slider.blue::-webkit-slider-runnable-track {
+  background: linear-gradient(to right, #000, var(--blue));
+}
+.range-slider.red::-moz-range-track {
+  background: linear-gradient(to right, #000, var(--red));
+}
+.range-slider.green::-moz-range-track {
+  background: linear-gradient(to right, #000, var(--green));
+}
+.range-slider.blue::-moz-range-track {
+  background: linear-gradient(to right, #000, var(--blue));
+}
+
+/* Other slider styles (non-RGB) */
+.range-slider.brightness,
+.range-slider.contrast,
+.range-slider.saturation {
+  accent-color: var(--thumb-bg);
+} 
+
 
 
 .canvas-area {
@@ -358,12 +344,11 @@ input.range-slider.blue {
   }
 }
 
-
 .overlay-toggle {
   position: absolute;
   top: 1rem;
   left: 50%;
-  transform: translate(-50%, 0); /* Default position */
+  transform: translate(-50%, 0);
   z-index: 5;
   padding: 0.5rem 1.25rem;
   font-size: 0.9rem;
@@ -372,7 +357,7 @@ input.range-slider.blue {
   border-radius: 9999px;
   box-shadow: 0 2px 6px var(--border);
   cursor: pointer;
-  opacity: 1; /* default visible state */
+  opacity: 1;
 }
 
 .fade-slide-down {
@@ -406,3 +391,4 @@ input.range-slider.blue {
   z-index: 0;
   user-select: none;
 }
+

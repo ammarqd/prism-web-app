@@ -152,19 +152,24 @@ function App() {
         <aside className="sidebar">
 
           <div className="control-panel rgb-panel">
+            <h3 className="rgb-heading">Colour</h3>
             {['red', 'green', 'blue'].map((color) => (
               <div key={color} className="slider-group">
-                <label className="slider-label">{color.charAt(0).toUpperCase() + color.slice(1)}</label>
-                <input
-                  className={`range-slider ${color}`}
-                  type="range"
-                  min="-0.5"
-                  max="0.5"
-                  step="0.05"
-                  value={filters[color]}
-                  onChange={(e) => handleFilterChange(color, e.target.value)}
-                  disabled={showOriginal}
-                />
+                <div className="slider-row">
+                  <label className="rgb-label">{color.charAt(0).toUpperCase()}</label>
+                  <input
+                    className={`range-slider ${color}`}
+                    type="range"
+                    min="0"
+                    max="255"
+                    step="1"
+                    value={Math.round((filters[color] + 0.5) * 255)}
+                    onChange={(e) => handleFilterChange(color, (parseInt(e.target.value) / 255) - 0.5)}
+                  />
+                  <div className="rgb-value">
+                    {Math.round((filters[color] + 0.5) * 255)}
+                  </div>
+                </div>
               </div>
             ))}
           </div>
