@@ -11,6 +11,9 @@
   --red: #ff3b30;
   --green: #34c759;
   --blue: #007aff;
+  --brightness: #888;
+  --contrast: #555;
+  --saturation: #ff9500;
 }
 
 * {
@@ -258,6 +261,16 @@ html, body {
 .range-slider.blue::-webkit-slider-runnable-track {
   background: linear-gradient(to right, #000, var(--blue));
 }
+.range-slider.brightness::-webkit-slider-runnable-track {
+  background: linear-gradient(to right, #000, var(--brightness));
+}
+.range-slider.contrast::-webkit-slider-runnable-track {
+  background: linear-gradient(to right, #000, var(--contrast));
+}
+.range-slider.saturation::-webkit-slider-runnable-track {
+  background: linear-gradient(to right, #000, var(--saturation));
+}
+
 .range-slider.red::-moz-range-track {
   background: linear-gradient(to right, #000, var(--red));
 }
@@ -267,14 +280,17 @@ html, body {
 .range-slider.blue::-moz-range-track {
   background: linear-gradient(to right, #000, var(--blue));
 }
+.range-slider.brightness::-moz-range-track {
+  background: linear-gradient(to right, #000, var(--brightness));
+}
+.range-slider.contrast::-moz-range-track {
+  background: linear-gradient(to right, #000, var(--contrast));
+}
+.range-slider.saturation::-moz-range-track {
+  background: linear-gradient(to right, #000, var(--saturation));
+}
 
-/* Other slider styles (non-RGB) */
-.range-slider.brightness,
-.range-slider.contrast,
-.range-slider.saturation {
-  accent-color: var(--thumb-bg);
-} 
-
+/* Thumb styles */
 .range-slider::-webkit-slider-thumb {
   border-radius: 0;
   -webkit-appearance: none;
@@ -284,7 +300,7 @@ html, body {
   width: 8px;
   height: 4px;
   background: #aaa;
-  margin-top: 24px; /* pushes it below the track */
+  margin-top: 24px;
 
   clip-path: polygon(50% 0%, 100% 100%, 0% 100%);
 }

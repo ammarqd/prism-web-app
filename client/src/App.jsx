@@ -174,46 +174,32 @@ function App() {
             ))}
           </div>
 
-          <div className="control-panel">
-            <label className="slider-label">Brightness</label>
-            <input
-              className="range-slider brightness"
-              type="range"
-              min="-0.5"
-              max="0.5"
-              step="0.1"
-              value={filters.brightness}
-              onChange={(e) => handleFilterChange('brightness', e.target.value)}
-              disabled={showOriginal}
-            />
-          </div>
-
-          <div className="control-panel">
-            <label className="slider-label">Contrast</label>
-            <input
-              className="range-slider contrast"
-              type="range"
-              min="-1"
-              max="1"
-              step="0.1"
-              value={filters.contrast}
-              onChange={(e) => handleFilterChange('contrast', e.target.value)}
-              disabled={showOriginal}
-            />
-          </div>
-
-          <div className="control-panel">
-            <label className="slider-label">Saturation</label>
-            <input
-              className="range-slider saturation"
-              type="range"
-              min="-1"
-              max="1"
-              step="0.1"
-              value={filters.saturation}
-              onChange={(e) => handleFilterChange('saturation', e.target.value)}
-              disabled={showOriginal}
-            />
+          <div className="control-panel rgb-panel">
+            <h3 className="rgb-heading">Adjustments</h3>
+            {[
+              { name: 'brightness', min: -0.5, max: 0.5, step: 0.1, label: 'B' },
+              { name: 'contrast', min: -1, max: 1, step: 0.1, label: 'C' },
+              { name: 'saturation', min: -1, max: 1, step: 0.1, label: 'S' }
+            ].map((filter) => (
+              <div key={filter.name} className="slider-group">
+                <div className="slider-row">
+                  <label className="rgb-label">{filter.label}</label>
+                  <input
+                    className={`range-slider ${filter.name}`}
+                    type="range"
+                    min={filter.min}
+                    max={filter.max}
+                    step={filter.step}
+                    value={filters[filter.name]}
+                    onChange={(e) => handleFilterChange(filter.name, e.target.value)}
+                    disabled={showOriginal}
+                  />
+                  <div className="rgb-value">
+                    {filters[filter.name].toFixed(1)}
+                  </div>
+                </div>
+              </div>
+            ))}
           </div>
         </aside>
 
