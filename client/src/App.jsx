@@ -25,7 +25,10 @@ function App() {
   const [filters, setFilters] = useState({
     brightness: 0,
     contrast: 0,
-    saturation: 0
+    saturation: 0,
+    red: 0,
+    green: 0,
+    blue: 0
   })
   const [canvas, setCanvas] = useState(null)
   const [texture, setTexture] = useState(null)
@@ -46,34 +49,54 @@ function App() {
     img.src = imageUrl
 
     img.decode().then(() => {
-      setFilters({ brightness: 0, contrast: 0, saturation: 0 })
+      setFilters({
+        brightness: 0,
+        contrast: 0,
+        saturation: 0,
+        red: 0,
+        green: 0,
+        blue: 0
+      })
       setImage({ url: imageUrl, element: img })
-      createFilteredCanvas(img, 0, 0, 0)
+      createFilteredCanvas(img, 0, 0, 0, 0, 0, 0)
     }).catch((err) => {
       console.error('Image decode failed:', err)
     })
   }
 
-  const createFilteredCanvas = (img, brightnessValue, contrastValue, saturationValue) => {
+  const applyFiltersToCanvas = (canvasInstance, textureInstance, currentFilters) => {
+    const { brightness, contrast, saturation, red, green, blue } = currentFilters
+
+    // Curves helper to shift color channels
+    const createCurve = (bias) => [
+      [0, Math.min(1, Math.max(0, 0 + bias))],
+      [1, Math.min(1, Math.max(0, 1 + bias))]
+    ]
+
+    canvasInstance.draw(textureInstance)
+      .brightnessContrast(brightness, contrast)
+      .hueSaturation(0, saturation)
+      .curves(createCurve(red), createCurve(green), createCurve(blue))
+      .update()
+  }
+
+  const createFilteredCanvas = (img, brightness, contrast, saturation, red = 0, green = 0, blue = 0) => {
     const newCanvas = fx.canvas()
     const newTexture = newCanvas.texture(img)
     newCanvas.width = img.width
     newCanvas.height = img.height
 
-    newCanvas.draw(newTexture)
-      .brightnessContrast(brightnessValue, contrastValue)
-      .hueSaturation(0, saturationValue)
-      .update()
+    applyFiltersToCanvas(newCanvas, newTexture, {
+      brightness,
+      contrast,
+      saturation,
+      red,
+      green,
+      blue
+    })
 
     setCanvas(newCanvas)
     setTexture(newTexture)
-  }
-
-  const updateCanvasFilters = (newFilters) => {
-    canvas.draw(texture)
-      .brightnessContrast(newFilters.brightness, newFilters.contrast)
-      .hueSaturation(0, newFilters.saturation)
-      .update()
   }
 
   const handleFilterChange = (filterName, value) => {
@@ -82,7 +105,7 @@ function App() {
       [filterName]: parseFloat(value)
     }
     setFilters(newFilters)
-    updateCanvasFilters(newFilters)
+    applyFiltersToCanvas(canvas, texture, newFilters)
   }
 
   useEffect(() => {
@@ -128,49 +151,65 @@ function App() {
       <div className="layout">
         <aside className="sidebar">
 
-          <>
-            <div className="control-panel">
-              <label>Brightness</label>
-              <input
-                className="range-slider"
-                type="range"
-                min="-0.5"
-                max="0.5"
-                step="0.1"
-                value={filters.brightness}
-                onChange={(e) => handleFilterChange('brightness', e.target.value)}
-                disabled={showOriginal}
-              />
-            </div>
+          <div className="control-panel rgb-panel">
+            {['red', 'green', 'blue'].map((color) => (
+              <div key={color} className="slider-group">
+                <label className="slider-label">{color.charAt(0).toUpperCase() + color.slice(1)}</label>
+                <input
+                  className={`range-slider ${color}`}
+                  type="range"
+                  min="-0.5"
+                  max="0.5"
+                  step="0.05"
+                  value={filters[color]}
+                  onChange={(e) => handleFilterChange(color, e.target.value)}
+                  disabled={showOriginal}
+                />
+              </div>
+            ))}
+          </div>
 
-            <div className="control-panel">
-              <label>Contrast</label>
-              <input
-                className="range-slider"
-                type="range"
-                min="-1"
-                max="1"
-                step="0.1"
-                value={filters.contrast}
-                onChange={(e) => handleFilterChange('contrast', e.target.value)}
-                disabled={showOriginal}
-              />
-            </div>
+          <div className="control-panel">
+            <label className="slider-label">Brightness</label>
+            <input
+              className="range-slider brightness"
+              type="range"
+              min="-0.5"
+              max="0.5"
+              step="0.1"
+              value={filters.brightness}
+              onChange={(e) => handleFilterChange('brightness', e.target.value)}
+              disabled={showOriginal}
+            />
+          </div>
 
-            <div className="control-panel">
-              <label>Saturation</label>
-              <input
-                className="range-slider"
-                type="range"
-                min="-1"
-                max="1"
-                step="0.1"
-                value={filters.saturation}
-                onChange={(e) => handleFilterChange('saturation', e.target.value)}
-                disabled={showOriginal}
-              />
-            </div>
-          </>
+          <div className="control-panel">
+            <label className="slider-label">Contrast</label>
+            <input
+              className="range-slider contrast"
+              type="range"
+              min="-1"
+              max="1"
+              step="0.1"
+              value={filters.contrast}
+              onChange={(e) => handleFilterChange('contrast', e.target.value)}
+              disabled={showOriginal}
+            />
+          </div>
+
+          <div className="control-panel">
+            <label className="slider-label">Saturation</label>
+            <input
+              className="range-slider saturation"
+              type="range"
+              min="-1"
+              max="1"
+              step="0.1"
+              value={filters.saturation}
+              onChange={(e) => handleFilterChange('saturation', e.target.value)}
+              disabled={showOriginal}
+            />
+          </div>
         </aside>
 
         <main className="canvas-area">
@@ -216,7 +255,6 @@ function App() {
               >
                 Hold to Show Original
               </button>
-
 
               <img
                 src={image.url}

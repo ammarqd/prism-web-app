@@ -156,6 +156,20 @@ html, body {
   border-radius: 12px;
 }
 
+.rgb-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.rgb-label {
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: #333;
+  margin-bottom: -0.3rem;
+  margin-top: 0.3rem;
+}
+
 .control-panel {
   background: var(--control-bg);
   padding: 1rem;
@@ -167,7 +181,7 @@ html, body {
 }
 
 .control-panel label {
-  font-size: 0.9rem;
+  font-size: 0.75rem;
   font-weight: 500;
 }
 
@@ -202,6 +216,81 @@ html, body {
 .range-slider::-webkit-slider-thumb:hover {
   transform: scale(1.2);
 }
+
+/* Red slider gradient track */
+input.range-slider.red {
+  background: linear-gradient(to right, #000000, #ff0000);
+}
+
+/* Green slider gradient track */
+input.range-slider.green {
+  background: linear-gradient(to right, #000000, #00ff00);
+}
+
+/* Blue slider gradient track */
+input.range-slider.blue {
+  background: linear-gradient(to right, #000000, #0000ff);
+}
+
+/* Basic slider styling to remove default appearance and add custom track height */
+.range-slider {
+  -webkit-appearance: none;
+  width: 100%;
+  height: 6px;
+  border-radius: 3px;
+  outline: none;
+  margin: 0;
+  padding: 0;
+}
+
+/* For WebKit browsers (Chrome, Safari) */
+.range-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--thumb-bg);
+  cursor: pointer;
+  transition: transform 0.2s;
+  margin-top: -4px; /* center the thumb vertically */
+  position: relative;
+  z-index: 2;
+}
+.range-slider::-webkit-slider-thumb:hover {
+  transform: scale(1.2);
+}
+
+/* For Firefox */
+.range-slider::-moz-range-thumb {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: transform 0.2s;
+  position: relative;
+  z-index: 2;
+}
+.range-slider::-moz-range-thumb:hover {
+  transform: scale(1.2);
+}
+
+/* Remove default track styling for Firefox */
+.range-slider::-moz-range-track {
+  height: 6px;
+  border-radius: 3px;
+  background: transparent; /* we set background on input itself */
+}
+
+/* Optional: for IE */
+.range-slider::-ms-track {
+  height: 6px;
+  border-radius: 3px;
+  background: transparent;
+  border-color: transparent;
+  color: transparent;
+}
+
 
 .canvas-area {
   flex-grow: 1;
