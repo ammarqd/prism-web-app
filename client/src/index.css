@@ -170,7 +170,7 @@ html, body {
 }
 
 .control-panel label {
-  font-size: 0.75rem;
+  font-size: 0.8rem;
   font-weight: 500;
 }
 
@@ -183,10 +183,9 @@ html, body {
 
 .rgb-heading {
   margin: 0;
-  font-size: 0.9rem;
-  font-weight: 600;
-  letter-spacing: 0.5px;
+  font-size: 0.8rem;
   color: var(--text);
+  font-weight: 500;
 }
 
 .slider-group {
