@@ -21,7 +21,6 @@ function LoginModal({ isOpen, onClose }) {
 function App() {
   const [image, setImage] = useState(null)
   const [isLoginOpen, setIsLoginOpen] = useState(false)
-  const [showOriginal, setShowOriginal] = useState(false)
   const fileInputRef = useRef(null)
 
   const handleFileChange = (e) => {
@@ -119,7 +118,7 @@ function App() {
               <img
                 src={image.url}
                 alt="original"
-                className={`image-display original-image ${showOriginal ? 'visible' : 'hidden'}`}
+                className={"image-display"}
               />
             </>
           )}
