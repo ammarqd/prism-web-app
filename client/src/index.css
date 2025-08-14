@@ -168,7 +168,7 @@ html, body {
 .slider {
   -webkit-appearance: none;
   appearance: none;
-  height: 6px;
+  height: 8px;
   border-radius: 4px;
   outline: none;
   cursor: pointer;
@@ -194,29 +194,6 @@ html, body {
 .slider-saturation {
   background: linear-gradient(to right, 
     gray, red);
-}
-
-/* Slider thumb styling */
-.slider::-webkit-slider-thumb {
-  -webkit-appearance: none;
-  appearance: none;
-  width: 14px;
-  height: 14px;
-  background: var(--icon-bg);
-  border-radius: 50%;
-  border: 2px solid white;
-  box-shadow: 0 0 2px rgba(0,0,0,0.4);
-  cursor: pointer;
-}
-
-.slider::-moz-range-thumb {
-  width: 14px;
-  height: 14px;
-  background: var(--icon-bg);
-  border-radius: 50%;
-  border: 2px solid white;
-  box-shadow: 0 0 2px rgba(0,0,0,0.4);
-  cursor: pointer;
 }
 
 .canvas-area {
