@@ -21,6 +21,7 @@ function LoginModal({ isOpen, onClose }) {
 function App() {
   const [image, setImage] = useState(null)
   const [isLoginOpen, setIsLoginOpen] = useState(false)
+
   const fileInputRef = useRef(null)
 
   const handleFileChange = (e) => {
@@ -64,7 +65,31 @@ function App() {
       </header>
 
       <div className="layout">
-        <aside className="sidebar"></aside>
+       <aside className="sidebar">
+        <div className="control-panel">
+          <h3 className="control-title">Colours</h3>
+
+          <div className="slider-group">
+            <label htmlFor="hue">Hue</label>
+            <input type="range" id="hue" min="0" max="360" className="slider slider-hue" />
+          </div>
+
+          <div className="slider-group">
+            <label htmlFor="brightness">Brightness</label>
+            <input type="range" id="brightness" min="0" max="200" defaultValue="100" className="slider slider-brightness" />
+          </div>
+
+          <div className="slider-group">
+            <label htmlFor="contrast">Contrast</label>
+            <input type="range" id="contrast" min="0" max="200" defaultValue="100" className="slider slider-contrast" />
+          </div>
+
+          <div className="slider-group">
+            <label htmlFor="saturation">Saturation</label>
+            <input type="range" id="saturation" min="0" max="200" defaultValue="100" className="slider slider-saturation" />
+          </div>
+        </div>
+      </aside>
 
         <main className="canvas-area">
           {!image && (
