@@ -77,7 +77,6 @@ html, body {
   width: 300px;
   display: flex;
   flex-direction: column;
-  gap: 1rem;
 }
 
 .modal-title {
@@ -93,6 +92,42 @@ html, body {
   border-radius: 8px;
   font-size: 0.9rem;
   background: var(--control-bg);
+}
+
+.input-container {
+  display: flex;
+  flex-direction: column;
+  margin-top: 1rem;
+}
+
+.input-group {
+  display: flex;
+  align-items: center;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 0.4rem 0.6rem;
+  background: var(--control-bg, #fff);
+}
+
+.input-group + .input-group {
+  margin-top: 0.75rem;
+}
+
+.input-icon {
+  width: 20px;
+  height: 20px;
+  stroke: var(--text);
+  flex-shrink: 0;
+  margin-right: 0.5rem;
+}
+
+.input-group .modal-input {
+  border: none;
+  outline: none;
+  flex: 1;
+  font-size: 0.9rem;
+  background: transparent;
+  padding: 0.4rem 0;
 }
 
 .modal-actions {
@@ -197,18 +232,21 @@ html, body {
 }
 
 .canvas-area {
+  height: calc(100dvh - 50px);
   position: relative;
   display: flex;
   flex: 1 1 100%;
   justify-content: center;
   align-items: center;
-  padding: 2.5rem;
+  padding: rem 2.5rem;
   background: var(--bg);
   overflow: hidden;
 }
 
 .image-display {
   max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
 }
 
 .image-nav {

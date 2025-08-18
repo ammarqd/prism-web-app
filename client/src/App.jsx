@@ -7,8 +7,48 @@ function LoginModal({ isOpen, onClose }) {
     <div className="modal-overlay">
       <div className="modal">
         <h2 className="modal-title">Sign In</h2>
-        <input className="modal-input" type="email" placeholder="Email" />
-        <input className="modal-input" type="password" placeholder="Password" />
+
+        <div className="input-container">
+          
+          <div className="input-group">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="input-icon"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              strokeWidth="2"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 
+                  1.79-4 4 1.79 4 4 4zM6 20v-1a4 4 0 014-4h4a4 
+                  4 0 014 4v1"
+              />
+            </svg>
+            <input className="modal-input" type="text" placeholder="Username" />
+          </div>
+
+          <div className="input-group">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="input-icon"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              strokeWidth="2"
+            >
+              <rect x="3" y="11" width="17" height="11" rx="2" ry="2"/>
+              <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+              <circle cx="12" cy="16" r="1"/>
+              <path d="M12 17v2"/>
+            </svg>
+            <input className="modal-input" type="password" placeholder="Password" />
+          </div>
+
+        </div>
+
         <div className="modal-actions">
           <button className="modal-button" onClick={onClose}>Cancel</button>
           <button className="modal-button primary">Login</button>
@@ -17,6 +57,7 @@ function LoginModal({ isOpen, onClose }) {
     </div>
   )
 }
+
 
 function App() {
   const [image, setImage] = useState(null)
