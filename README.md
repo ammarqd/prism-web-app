@@ -1,2 +1,2 @@
-# image-filters-app
-Fullstack React and Express image filters app.
+# PRISM
+Fullstack React and Express image enhancement app 
