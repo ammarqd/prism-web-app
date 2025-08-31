@@ -1,46 +1,29 @@
-import { useState, useRef } from 'react'
+import { useState, useRef, type ChangeEvent, type JSX } from 'react'
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from '@/components/ui/dialog'
+import { Button } from '@/components/ui/button'
+import { Input } from '@/components/ui/input'
+import { Checkbox } from '@/components/ui/checkbox'
 
-function LoginModal({ isOpen, onClose }) {
-  if (!isOpen) return null
-
-  return (
-    <div className="fixed inset-0 bg-black bg-opacity-40 flex justify-center items-center z-50">
-      <div className="bg-white p-8 rounded-2xl shadow-2xl w-80 flex flex-col">
-        <h2 className="text-xl font-semibold text-center mb-4 text-gray-900">Sign In</h2>
-        <div className="flex flex-col mt-4 space-y-3">
-          <div className="flex items-center border border-gray-300 rounded-xl px-3 py-2 bg-white">
-            <input 
-              className="flex-1 outline-none text-sm bg-transparent py-2" 
-              type="text" 
-              placeholder="Username" 
-            />
-          </div>
-          <div className="flex items-center border border-gray-300 rounded-xl px-3 py-2 bg-white">
-            <input 
-              className="flex-1 outline-none text-sm bg-transparent py-2" 
-              type="password" 
-              placeholder="Password" 
-            />
-          </div>
-        </div>
-        <div className="flex mt-4">
-          <button className="w-full py-3 text-sm rounded-2xl bg-gray-900 text-white cursor-pointer transition-colors hover:bg-gray-800 font-medium">
-            Log in
-          </button>
-        </div>
-      </div>
-    </div>
-  )
+interface ImageData {
+  file: File
+  url: string
 }
 
-function App() {
-  const [image, setImage] = useState(null)
-  const [isLoginOpen, setIsLoginOpen] = useState(false)
-  const [showOriginal, setShowOriginal] = useState(false)
-  const fileInputRef = useRef(null)
+function App(): JSX.Element {
+  const [image, setImage] = useState<ImageData | null>(null)
+  const [isLoginOpen, setIsLoginOpen] = useState<boolean>(false)
+  const [showOriginal, setShowOriginal] = useState<boolean>(false)
+  const [isRegister, setIsRegister] = useState<boolean>(false)
+  const fileInputRef = useRef<HTMLInputElement>(null)
 
-  const handleFileChange = (e) => {
-    const file = e.target.files[0]
+  const handleFileChange = (e: ChangeEvent<HTMLInputElement>): void => {
+    const file = e.target.files?.[0]
     if (file) {
       const url = URL.createObjectURL(file)
       setImage({ file, url })
@@ -52,28 +35,98 @@ function App() {
       <header className="h-12 flex items-center justify-between px-4 bg-white border-b border-gray-300">
         <h1 className="text-xl font-semibold tracking-widest uppercase text-gray-900">PRISM</h1>
         <nav className="flex items-center">
-                      <button 
-            type="button" 
-            className="flex items-center gap-2 font-medium text-sm py-2 px-4 rounded-full border border-gray-300 bg-white cursor-pointer transition-colors hover:bg-gray-50"
-            onClick={() => setIsLoginOpen(true)}
-          >
-            <svg 
-              xmlns="http://www.w3.org/2000/svg" 
-              className="w-5 h-5" 
-              fill="none" 
-              viewBox="0 0 24 24" 
-              stroke="currentColor" 
-              strokeWidth={2}
-              aria-hidden="true"
-            >
-              <path 
-                strokeLinecap="round" 
-                strokeLinejoin="round" 
-                d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zM6 20v-1a4 4 0 014-4h4a4 4 0 014 4v1" 
-              />
-            </svg>
-            Sign In
-          </button>
+          <Dialog open={isLoginOpen} onOpenChange={setIsLoginOpen}>
+            <DialogTrigger asChild>
+              <button 
+                type="button" 
+                className="flex items-center gap-2 font-medium text-sm py-2 px-4 rounded-full border border-gray-300 bg-white cursor-pointer transition-colors hover:bg-gray-50"
+              >
+                <svg 
+                  xmlns="http://www.w3.org/2000/svg" 
+                  className="w-5 h-5" 
+                  fill="none" 
+                  viewBox="0 0 24 24" 
+                  stroke="currentColor" 
+                  strokeWidth={2}
+                  aria-hidden="true"
+                >
+                  <path 
+                    strokeLinecap="round" 
+                    strokeLinejoin="round" 
+                    d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zM6 20v-1a4 4 0 014-4h4a4 4 0 014 4v1" 
+                  />
+                </svg>
+                Log In
+              </button>
+            </DialogTrigger>
+            <DialogContent className="sm:max-w-sm w-full max-w-xs">
+              <DialogHeader>
+                <DialogTitle className="text-xl font-semibold text-center">
+                  {isRegister ? 'Register' : 'Log In'}
+                </DialogTitle>
+              </DialogHeader>
+              <div className="flex flex-col space-y-3 pt-4">
+                <Input 
+                  type="email" 
+                  placeholder="Email"
+                  className="rounded-xl py-3"
+                />
+                <Input 
+                  type="password" 
+                  placeholder="Password"
+                  className="rounded-xl py-3"
+                />
+                {isRegister && (
+                  <Input 
+                    type="password" 
+                    placeholder="Confirm Password"
+                    className="rounded-xl"
+                  />
+                )}
+                {!isRegister && (
+                  <div className="flex items-center justify-between text-sm">
+                    <div className="flex items-center space-x-2">
+                      <Checkbox id="remember" />
+                      <label 
+                        htmlFor="remember" 
+                        className="text-gray-700 cursor-pointer select-none"
+                      >
+                        Remember me
+                      </label>
+                    </div>
+                    <button 
+                      type="button"
+                      className="text-black hover:text-gray-700 font-medium cursor-pointer transition-colors"
+                      onClick={() => {
+                        // Handle forgot password logic here
+                        console.log('Forgot password clicked')
+                      }}
+                    >
+                      Forgot password?
+                    </button>
+                  </div>
+                )}
+                <Button 
+                  className="w-full py-3 rounded-xl bg-black text-white hover:bg-gray-800 font-medium"
+                  onClick={() => setIsLoginOpen(false)}
+                >
+                  {isRegister ? 'Register' : 'Log In'}
+                </Button>
+                <div className="text-center">
+                  <button
+                    type="button"
+                    className="text-sm text-gray-600 hover:text-gray-900 cursor-pointer transition-colors"
+                    onClick={() => setIsRegister(!isRegister)}
+                  >
+                    {isRegister 
+                      ? 'Already have an account? Log in' 
+                      : "Don't have an account? Register"
+                    }
+                  </button>
+                </div>
+              </div>
+            </DialogContent>
+          </Dialog>
         </nav>
       </header>
 
@@ -202,8 +255,6 @@ function App() {
           )}
         </main>
       </div>
-
-      <LoginModal isOpen={isLoginOpen} onClose={() => setIsLoginOpen(false)} />
     </div>
   )
 }
