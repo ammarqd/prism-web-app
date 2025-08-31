@@ -31,7 +31,7 @@ function App(): JSX.Element {
   }
 
   return (
-    <div className="h-screen flex flex-col bg-white text-gray-900 overflow-hidden font-primary">
+    <div className="h-screen flex flex-col bg-white text-gray-900 overflow-hidden font-sans">
       <header className="h-12 flex items-center justify-between px-4 bg-white border-b border-gray-300">
         <h1 className="text-xl font-semibold tracking-widest uppercase text-gray-900">PRISM</h1>
         <nav className="flex items-center">
@@ -115,7 +115,7 @@ function App(): JSX.Element {
       </header>
 
       <div className="flex flex-1">
-        <aside className="bg-white border-r border-gray-300 flex flex-col w-70 rounded-xl">
+        <aside className="bg-white border-r border-gray-300 flex flex-col w-80 rounded-xl">
           <div className="p-8 flex flex-col gap-4">
             <h3 className="text-base font-semibold m-0 pb-2 border-b border-gray-300 text-gray-900">Colours</h3>
             
@@ -126,10 +126,11 @@ function App(): JSX.Element {
                 id="hue" 
                 min="0" 
                 max="360" 
-                className="h-2 rounded cursor-pointer appearance-none slider-hue"
+                className="h-2 rounded cursor-pointer appearance-none"
                 style={{
                   WebkitAppearance: 'none',
                   MozAppearance: 'none',
+                  background: 'linear-gradient(to right, red, yellow, lime, cyan, blue, magenta, red)'
                 }}
               />
             </div>
@@ -142,10 +143,11 @@ function App(): JSX.Element {
                 min="0" 
                 max="200" 
                 defaultValue="100" 
-                className="h-2 rounded cursor-pointer appearance-none slider-brightness"
+                className="h-2 rounded cursor-pointer appearance-none"
                 style={{
                   WebkitAppearance: 'none',
                   MozAppearance: 'none',
+                  background: 'linear-gradient(to right, black, gray, white)'
                 }}
               />
             </div>
@@ -158,10 +160,11 @@ function App(): JSX.Element {
                 min="0" 
                 max="200" 
                 defaultValue="100" 
-                className="h-2 rounded cursor-pointer appearance-none slider-contrast"
+                className="h-2 rounded cursor-pointer appearance-none"
                 style={{
                   WebkitAppearance: 'none',
                   MozAppearance: 'none',
+                  background: 'linear-gradient(to right, #777, #000)'
                 }}
               />
             </div>
@@ -174,10 +177,11 @@ function App(): JSX.Element {
                 min="0" 
                 max="200" 
                 defaultValue="100" 
-                className="h-2 rounded cursor-pointer appearance-none slider-saturation"
+                className="h-2 rounded cursor-pointer appearance-none"
                 style={{
                   WebkitAppearance: 'none',
                   MozAppearance: 'none',
+                  background: 'linear-gradient(to right, gray, red)'
                 }}
               />
             </div>
@@ -195,7 +199,7 @@ function App(): JSX.Element {
                 onChange={handleFileChange} 
               />
               <div 
-                className="w-4/5 max-w-lg h-70 bg-gray-50 border-2 border-dashed border-gray-300 rounded-2xl flex flex-col items-center justify-center cursor-pointer text-center transition-colors p-8 hover:bg-gray-100"
+                className="w-4/5 max-w-lg h-80 bg-gray-50 border-2 border-dashed border-gray-300 rounded-2xl flex flex-col items-center justify-center cursor-pointer text-center transition-colors p-8 hover:bg-gray-100"
                 onClick={() => fileInputRef.current?.click()}
               >
                 <svg 
@@ -220,15 +224,48 @@ function App(): JSX.Element {
 
           {image && (
             <>
-              <div className="flex justify-center pt-3 pb-3">
-                <button 
-                  className="py-2 px-4 text-sm border border-gray-300 bg-white text-gray-900 cursor-pointer rounded-full shadow-md font-medium"
-                  onMouseDown={() => setShowOriginal(true)}
-                  onMouseUp={() => setShowOriginal(false)}
-                  onMouseLeave={() => setShowOriginal(false)}
-                >
-                  Hold to Show Original
-                </button>
+              <input 
+                type="file" 
+                accept="image/*" 
+                ref={fileInputRef} 
+                className="hidden" 
+                onChange={handleFileChange} 
+              />
+              <div className="flex items-center pt-3 pb-3 px-4">
+                <div className="flex-1">
+                  <button 
+                    className="flex items-center gap-2 py-2 px-3 border border-gray-300 bg-white text-gray-900 cursor-pointer rounded-full shadow-md hover:bg-gray-50 transition-colors text-sm font-medium"
+                    onClick={() => fileInputRef.current?.click()}
+                    title="Upload new image"
+                  >
+                  <svg 
+                    xmlns="http://www.w3.org/2000/svg" 
+                    className="w-4 h-4" 
+                    fill="none" 
+                    viewBox="0 0 24 24" 
+                    stroke="currentColor" 
+                    strokeWidth={2}
+                  >
+                    <path 
+                      strokeLinecap="round" 
+                      strokeLinejoin="round" 
+                      d="M4 16v2a2 2 0 002 2h12a2 2 0 002-2v-2M12 12v6m0-6l-3 3m3-3l3 3m0-6V6a2 2 0 00-2-2H9a2 2 0 00-2 2v6" 
+                    />
+                  </svg>
+                    Upload
+                  </button>
+                </div>
+                <div className="flex-1 flex justify-center">
+                  <button 
+                    className="py-2 px-4 text-sm border border-gray-300 bg-white text-gray-900 cursor-pointer rounded-full shadow-md font-medium hover:bg-gray-50 transition-colors"
+                    onMouseDown={() => setShowOriginal(true)}
+                    onMouseUp={() => setShowOriginal(false)}
+                    onMouseLeave={() => setShowOriginal(false)}
+                  >
+                    Hold to Show Original
+                  </button>
+                </div>
+                <div className="flex-1"></div>
               </div>
               <div className="flex-1 flex justify-center items-center px-4 pb-12" style={{ minHeight: 0 }}>
                 <img 
