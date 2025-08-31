@@ -17,6 +17,7 @@ interface ImageData {
 function App(): JSX.Element {
   const [image, setImage] = useState<ImageData | null>(null)
   const [isLoginOpen, setIsLoginOpen] = useState<boolean>(false)
+  // @ts-ignore
   const [showOriginal, setShowOriginal] = useState<boolean>(false)
   const [isRegister, setIsRegister] = useState<boolean>(false)
   const fileInputRef = useRef<HTMLInputElement>(null)
@@ -183,9 +184,9 @@ function App(): JSX.Element {
           </div>
         </aside>
 
-        <main className="relative flex flex-1 justify-center items-center bg-white overflow-hidden" style={{ height: 'calc(100vh - 3rem)' }}>
+        <main className="flex flex-1 flex-col bg-white overflow-hidden" style={{ height: 'calc(100vh - 3rem)' }}>
           {!image && (
-            <>
+            <div className="flex flex-1 justify-center items-center">
               <input 
                 type="file" 
                 accept="image/*" 
@@ -214,12 +215,12 @@ function App(): JSX.Element {
                 <p className="text-base font-medium text-gray-900 m-0">Click or tap to upload an image</p>
                 <p className="text-sm text-gray-600 mt-1">JPG, PNG, or GIF — max 5MB</p>
               </div>
-            </>
+            </div>
           )}
 
           {image && (
             <>
-              <div className="absolute top-3 left-1/2 transform -translate-x-1/2 flex">
+              <div className="flex justify-center pt-3 pb-3">
                 <button 
                   className="py-2 px-4 text-sm border border-gray-300 bg-white text-gray-900 cursor-pointer rounded-full shadow-md font-medium"
                   onMouseDown={() => setShowOriginal(true)}
@@ -229,11 +230,13 @@ function App(): JSX.Element {
                   Hold to Show Original
                 </button>
               </div>
-              <img 
-                src={image.url} 
-                alt="uploaded" 
-                className="max-w-full max-h-full p-13 object-contain" 
-              />
+              <div className="flex-1 flex justify-center items-center px-4 pb-12" style={{ minHeight: 0 }}>
+                <img 
+                  src={image.url} 
+                  alt="uploaded" 
+                  className="max-w-full max-h-full object-contain" 
+                />
+              </div>
             </>
           )}
         </main>
