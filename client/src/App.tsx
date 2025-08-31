@@ -8,7 +8,6 @@ import {
 } from '@/components/ui/dialog'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
-import { Checkbox } from '@/components/ui/checkbox'
 
 interface ImageData {
   file: File
@@ -39,11 +38,12 @@ function App(): JSX.Element {
             <DialogTrigger asChild>
               <button 
                 type="button" 
-                className="flex items-center gap-2 font-medium text-sm py-2 px-4 rounded-full border border-gray-300 bg-white cursor-pointer transition-colors hover:bg-gray-50"
+                className="flex items-center gap-2 font-medium text-sm py-2 px-5 rounded-full border border-gray-300 bg-white cursor-pointer transition-colors hover:bg-gray-50"
               >
+                Log In
                 <svg 
                   xmlns="http://www.w3.org/2000/svg" 
-                  className="w-5 h-5" 
+                  className="w-5 h-5 transform scale-x-[-1]"
                   fill="none" 
                   viewBox="0 0 24 24" 
                   stroke="currentColor" 
@@ -53,10 +53,9 @@ function App(): JSX.Element {
                   <path 
                     strokeLinecap="round" 
                     strokeLinejoin="round" 
-                    d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zM6 20v-1a4 4 0 014-4h4a4 4 0 014 4v1" 
+                    d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1" 
                   />
                 </svg>
-                Log In
               </button>
             </DialogTrigger>
             <DialogContent className="sm:max-w-sm w-full max-w-xs">
@@ -65,7 +64,7 @@ function App(): JSX.Element {
                   {isRegister ? 'Register' : 'Log In'}
                 </DialogTitle>
               </DialogHeader>
-              <div className="flex flex-col space-y-3 pt-4">
+              <div className="flex flex-col space-y-3.5 pt-4">
                 <Input 
                   type="email" 
                   placeholder="Email"
@@ -76,29 +75,13 @@ function App(): JSX.Element {
                   placeholder="Password"
                   className="rounded-xl py-3"
                 />
-                {isRegister && (
-                  <Input 
-                    type="password" 
-                    placeholder="Confirm Password"
-                    className="rounded-xl"
-                  />
-                )}
+
                 {!isRegister && (
-                  <div className="flex items-center justify-between text-sm">
-                    <div className="flex items-center space-x-2">
-                      <Checkbox id="remember" />
-                      <label 
-                        htmlFor="remember" 
-                        className="text-gray-700 cursor-pointer select-none"
-                      >
-                        Remember me
-                      </label>
-                    </div>
+                  <div className="flex justify-start">
                     <button 
                       type="button"
-                      className="text-black hover:text-gray-700 font-medium cursor-pointer transition-colors"
+                      className="text-gray-600 hover:text-gray-900 cursor-pointer transition-colors text-sm"
                       onClick={() => {
-                        // Handle forgot password logic here
                         console.log('Forgot password clicked')
                       }}
                     >
@@ -107,7 +90,7 @@ function App(): JSX.Element {
                   </div>
                 )}
                 <Button 
-                  className="w-full py-3 rounded-xl bg-black text-white hover:bg-gray-800 font-medium"
+                  className="w-full py-3 rounded-xl bg-gray-900 text-white hover:bg-gray-800 font-medium"
                   onClick={() => setIsLoginOpen(false)}
                 >
                   {isRegister ? 'Register' : 'Log In'}
@@ -236,7 +219,7 @@ function App(): JSX.Element {
 
           {image && (
             <>
-              <div className="absolute top-4 left-1/2 transform -translate-x-1/2 flex">
+              <div className="absolute top-3 left-1/2 transform -translate-x-1/2 flex">
                 <button 
                   className="py-2 px-4 text-sm border border-gray-300 bg-white text-gray-900 cursor-pointer rounded-full shadow-md font-medium"
                   onMouseDown={() => setShowOriginal(true)}
@@ -249,7 +232,7 @@ function App(): JSX.Element {
               <img 
                 src={image.url} 
                 alt="uploaded" 
-                className="max-w-full max-h-full p-16 object-contain" 
+                className="max-w-full max-h-full p-13 object-contain" 
               />
             </>
           )}
