@@ -126,12 +126,7 @@ function App(): JSX.Element {
                 id="hue" 
                 min="0" 
                 max="360" 
-                className="h-2 rounded cursor-pointer appearance-none"
-                style={{
-                  WebkitAppearance: 'none',
-                  MozAppearance: 'none',
-                  background: 'linear-gradient(to right, red, yellow, lime, cyan, blue, magenta, red)'
-                }}
+                className="h-2 rounded cursor-pointer appearance-none slider-hue"
               />
             </div>
 
@@ -143,12 +138,7 @@ function App(): JSX.Element {
                 min="0" 
                 max="200" 
                 defaultValue="100" 
-                className="h-2 rounded cursor-pointer appearance-none"
-                style={{
-                  WebkitAppearance: 'none',
-                  MozAppearance: 'none',
-                  background: 'linear-gradient(to right, black, gray, white)'
-                }}
+                className="h-2 rounded cursor-pointer appearance-none slider-brightness"
               />
             </div>
 
@@ -160,12 +150,7 @@ function App(): JSX.Element {
                 min="0" 
                 max="200" 
                 defaultValue="100" 
-                className="h-2 rounded cursor-pointer appearance-none"
-                style={{
-                  WebkitAppearance: 'none',
-                  MozAppearance: 'none',
-                  background: 'linear-gradient(to right, #777, #000)'
-                }}
+                className="h-2 rounded cursor-pointer appearance-none slider-contrast"
               />
             </div>
 
@@ -177,12 +162,7 @@ function App(): JSX.Element {
                 min="0" 
                 max="200" 
                 defaultValue="100" 
-                className="h-2 rounded cursor-pointer appearance-none"
-                style={{
-                  WebkitAppearance: 'none',
-                  MozAppearance: 'none',
-                  background: 'linear-gradient(to right, gray, red)'
-                }}
+                className="h-2 rounded cursor-pointer appearance-none slider-saturation"
               />
             </div>
           </div>
