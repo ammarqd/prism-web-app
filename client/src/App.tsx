@@ -218,38 +218,71 @@ function App(): JSX.Element {
                 className="hidden" 
                 onChange={handleFileChange} 
               />
-              <div className="flex items-center pt-3 pb-3 px-4">
-                <div className="flex-1">
+              <div className="flex items-center justify-center pt-3 pb-3 px-4">
+                <div className="flex items-center gap-3">
                   <button 
                     className="flex items-center gap-2 py-2 px-3 border border-neutral-300 bg-white text-neutral-900 cursor-pointer rounded-full shadow-md hover:bg-neutral-50 transition-colors text-sm font-medium"
                     onClick={() => fileInputRef.current?.click()}
                     title="Upload new image"
                   >
-                  <svg 
-                    xmlns="http://www.w3.org/2000/svg" 
-                    className="w-4 h-4" 
-                    viewBox="0 0 24 24" 
-                    fill="none"
-                  >
-                    <path 
-                      stroke="currentColor" 
-                      strokeLinecap="round" 
-                      strokeLinejoin="round" 
-                      strokeWidth="2" 
-                      d="M21 12v7a2 2 0 0 1-2 2h-3m5-9c-6.442 0-10.105 1.985-12.055 4.243M21 12v-1.5M3 16v3a2 2 0 0 0 2 2v0h11M3 16V5a2 2 0 0 1 2-2h8M3 16c1.403-.234 3.637-.293 5.945.243M16 21c-1.704-2.768-4.427-4.148-7.055-4.757M8.5 7C8 7 7 7.3 7 8.5S8 10 8.5 10 10 9.7 10 8.5 9 7 8.5 7z"
-                    />
-                    <path 
-                      stroke="currentColor" 
-                      strokeLinecap="round" 
-                      strokeLinejoin="round" 
-                      strokeWidth="2" 
-                      d="M19 8.5V1.5m0 0l-2.5 2.5m2.5-2.5l2.5 2.5"
-                    />
-                  </svg>
-           
+                    <svg 
+                      xmlns="http://www.w3.org/2000/svg" 
+                      className="w-4 h-4" 
+                      viewBox="0 0 24 24" 
+                      fill="none"
+                    >
+                      <path 
+                        stroke="currentColor" 
+                        strokeLinecap="round" 
+                        strokeLinejoin="round" 
+                        strokeWidth="2" 
+                        d="M21 12v7a2 2 0 0 1-2 2h-3m5-9c-6.442 0-10.105 1.985-12.055 4.243M21 12v-1.5M3 16v3a2 2 0 0 0 2 2v0h11M3 16V5a2 2 0 0 1 2-2h8M3 16c1.403-.234 3.637-.293 5.945.243M16 21c-1.704-2.768-4.427-4.148-7.055-4.757M8.5 7C8 7 7 7.3 7 8.5S8 10 8.5 10 10 9.7 10 8.5 9 7 8.5 7z"
+                      />
+                      <path 
+                        stroke="currentColor" 
+                        strokeLinecap="round" 
+                        strokeLinejoin="round" 
+                        strokeWidth="2" 
+                        d="M19 8.5V1.5m0 0l-2.5 2.5m2.5-2.5l2.5 2.5"
+                      />
+                    </svg>
+                    New Image
                   </button>
-                </div>
-                <div className="flex-1 flex justify-center">
+                  
+                  <button 
+                    className="flex items-center justify-center w-9 h-9 border border-neutral-300 bg-white text-neutral-900 cursor-pointer rounded-full shadow-md hover:bg-neutral-50 transition-colors"
+                    onClick={() => console.log('Undo clicked')}
+                    title="Undo"
+                  >
+                    <svg 
+                      xmlns="http://www.w3.org/2000/svg" 
+                      className="w-4 h-4" 
+                      viewBox="0 0 24 24" 
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                    >
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M9 14l-5-5m0 0l5-5m-5 5h12a4 4 0 014 4v1"/>
+                    </svg>
+                  </button>
+                  
+                  <button 
+                    className="flex items-center justify-center w-9 h-9 border border-neutral-300 bg-white text-neutral-900 cursor-pointer rounded-full shadow-md hover:bg-neutral-50 transition-colors"
+                    onClick={() => console.log('Redo clicked')}
+                    title="Redo"
+                  >
+                    <svg 
+                      xmlns="http://www.w3.org/2000/svg" 
+                      className="w-4 h-4" 
+                      viewBox="0 0 24 24" 
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                    >
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M15 14l5-5m0 0l-5-5m5 5H8a4 4 0 00-4 4v1"/>
+                    </svg>
+                  </button>
+                  
                   <button 
                     className="flex items-center gap-2 py-2 px-3 text-sm border border-neutral-300 bg-white text-neutral-900 cursor-pointer rounded-full shadow-md font-medium hover:bg-neutral-50 transition-colors"
                     onMouseDown={() => setShowOriginal(true)}
@@ -267,7 +300,6 @@ function App(): JSX.Element {
                     Hold to Show Original
                   </button>
                 </div>
-                <div className="flex-1"></div>
               </div>
               <div className="flex-1 flex justify-center items-center px-4 pb-12" style={{ minHeight: 0 }}>
                 <img 
