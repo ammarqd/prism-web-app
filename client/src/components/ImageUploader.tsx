@@ -1,4 +1,4 @@
-import { type ChangeEvent, type RefObject } from 'react'
+import { type ChangeEvent } from 'react'
 
 interface ImageData {
   file: File
@@ -29,7 +29,7 @@ export function ImageUpload({ onImageChange, fileInputRef }: ImageUploadProps) {
         onChange={handleFileChange} 
       />
       <div 
-        className="w-4/5 max-w-lg h-80 bg-neutral-50 border-2 border-dashed border-neutral-300 rounded-2xl flex flex-col items-center justify-center cursor-pointer text-center transition-colors p-8 hover:bg-neutral-100"
+        className="w-4/5 max-w-lg h-80 bg-neutral-100 border-2 border-dashed border-neutral-300 rounded-2xl flex flex-col items-center justify-center cursor-pointer text-center transition-colors p-8 hover:bg-neutral-100"
         onClick={() => fileInputRef.current?.click()}
       >
         <svg 
