@@ -11,9 +11,9 @@ export function ImageToolbar({ onNewImage, onUndo, onRedo }: ImageToolbarProps) 
 
   return (
     <div className="flex items-center justify-center pt-3 pb-3 px-4">
-      <div className="flex items-center gap-3">
+      <div className="flex items-center divide-x px-2 border border-neutral-300 rounded-lg shadow-md bg-white" >
         <button 
-          className="flex items-center gap-2 py-2 px-3 border border-neutral-300 bg-white text-neutral-900 cursor-pointer rounded-md shadow-md hover:bg-neutral-50 transition-colors text-sm font-medium"
+          className="flex items-center gap-2 py-2 px-3 text-neutral-900 cursor-pointer hover:bg-neutral-50 transition-colors text-sm font-medium"
           onClick={onNewImage}
           title="Upload new image"
         >
@@ -42,7 +42,7 @@ export function ImageToolbar({ onNewImage, onUndo, onRedo }: ImageToolbarProps) 
         </button>
         
         <button 
-          className="flex items-center justify-center w-9 h-9 border border-neutral-300 bg-white text-neutral-900 cursor-pointer rounded-md shadow-md hover:bg-neutral-50 transition-colors"
+          className="flex items-center py-2 px-3 text-neutral-900 cursor-pointer hover:bg-neutral-50 transition-colors text-sm font-medium"
           onClick={onUndo}
           title="Undo"
         >
@@ -59,7 +59,7 @@ export function ImageToolbar({ onNewImage, onUndo, onRedo }: ImageToolbarProps) 
         </button>
         
         <button 
-          className="flex items-center justify-center w-9 h-9 border border-neutral-300 bg-white text-neutral-900 cursor-pointer rounded-md shadow-md hover:bg-neutral-50 transition-colors"
+          className="flex items-center py-2 px-3 text-neutral-900 cursor-pointer hover:bg-neutral-50 transition-colors text-sm font-medium" 
           onClick={onRedo}
           title="Redo"
         >
@@ -76,8 +76,7 @@ export function ImageToolbar({ onNewImage, onUndo, onRedo }: ImageToolbarProps) 
         </button>
         
         <button 
-          className="flex items-center gap-2 py-2 px-3 text-sm border border-neutral-300 bg-white text-neutral-900 cursor-pointer rounded-md shadow-md font-medium hover:bg-neutral-50 transition-colors"
-          onMouseDown={() => setShowOriginal(true)}
+          className="flex items-center py-2 gap-2 px-3 text-neutral-900 cursor-pointer hover:bg-neutral-50 transition-colors text-sm font-medium"
           onMouseUp={() => setShowOriginal(false)}
           onMouseLeave={() => setShowOriginal(false)}
         >
