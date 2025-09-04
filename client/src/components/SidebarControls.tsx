@@ -1,10 +1,10 @@
-import { useState } from "react";
+import { useState } from "react"
 
 export function SidebarControls() {
-  const [hue, setHue] = useState(0);
-  const [brightness, setBrightness] = useState(100);
-  const [contrast, setContrast] = useState(100);
-  const [saturation, setSaturation] = useState(100);
+  const [hue, setHue] = useState(0)
+  const [brightness, setBrightness] = useState(100)
+  const [contrast, setContrast] = useState(100)
+  const [saturation, setSaturation] = useState(100)
 
   return (
     <aside className="bg-white border-r border-neutral-300 flex flex-col w-80 rounded-xl">
@@ -13,6 +13,7 @@ export function SidebarControls() {
           Colours
         </h3>
 
+        {/* Hue */}
         <div className="flex flex-col">
           <label htmlFor="hue" className="text-sm font-medium text-neutral-900">
             Hue
@@ -27,12 +28,23 @@ export function SidebarControls() {
               onChange={(e) => setHue(Number(e.target.value))}
               className="h-2 rounded cursor-pointer appearance-none flex-1 slider-hue"
             />
-            <div className="w-10 text-center text-xs text-neutral-900 bg-neutral-100 border border-neutral-300 rounded px-1">
-              {hue}
-            </div>
+            <input
+              type="number"
+              min={0}
+              max={360}
+              value={hue}
+              onChange={(e) => {
+                let val = Number(e.target.value)
+                if (val > 360) val = 360
+                if (val < 0) val = 0
+                setHue(val)
+              }}
+              className="w-12 text-center text-xs font-semibold text-neutral-900 bg-neutral-100 border border-neutral-300 rounded"
+            />
           </div>
         </div>
 
+        {/* Brightness */}
         <div className="flex flex-col">
           <label htmlFor="brightness" className="text-sm font-medium text-neutral-900">
             Brightness
@@ -47,12 +59,23 @@ export function SidebarControls() {
               onChange={(e) => setBrightness(Number(e.target.value))}
               className="h-2 rounded cursor-pointer appearance-none flex-1 slider-brightness"
             />
-            <div className="w-10 text-center text-xs text-neutral-900 bg-neutral-100 border border-neutral-300 rounded px-1">
-              {brightness}
-            </div>
+            <input
+              type="number"
+              min={0}
+              max={200}
+              value={brightness}
+              onChange={(e) => {
+                let val = Number(e.target.value)
+                if (val > 200) val = 200
+                if (val < 0) val = 0
+                setBrightness(val)
+              }}
+              className="w-12 text-center text-xs font-semibold text-neutral-900 bg-neutral-100 border border-neutral-300 rounded"
+            />
           </div>
         </div>
 
+        {/* Contrast */}
         <div className="flex flex-col">
           <label htmlFor="contrast" className="text-sm font-medium text-neutral-900">
             Contrast
@@ -67,9 +90,19 @@ export function SidebarControls() {
               onChange={(e) => setContrast(Number(e.target.value))}
               className="h-2 rounded cursor-pointer appearance-none flex-1 slider-contrast"
             />
-            <div className="w-10 text-center text-xs text-neutral-900 bg-neutral-100 border border-neutral-300 rounded px-1">
-              {contrast}
-            </div>
+            <input
+              type="number"
+              min={0}
+              max={200}
+              value={contrast}
+              onChange={(e) => {
+                let val = Number(e.target.value)
+                if (val > 200) val = 200
+                if (val < 0) val = 0
+                setContrast(val)
+              }}
+              className="w-12 text-center text-xs font-semibold text-neutral-900 bg-neutral-100 border border-neutral-300 rounded"
+            />
           </div>
         </div>
 
@@ -88,12 +121,22 @@ export function SidebarControls() {
               onChange={(e) => setSaturation(Number(e.target.value))}
               className="h-2 rounded cursor-pointer appearance-none flex-1 slider-saturation"
             />
-            <div className="w-10 text-center text-xs text-neutral-900 bg-neutral-100 border border-neutral-300 rounded px-1">
-              {saturation}
-            </div>
+            <input
+              type="number"
+              min={0}
+              max={200}
+              value={saturation}
+              onChange={(e) => {
+                let val = Number(e.target.value)
+                if (val > 200) val = 200
+                if (val < 0) val = 0
+                setSaturation(val)
+              }}
+              className="w-12 text-center text-xs font-semibold text-neutral-900 bg-neutral-100 border border-neutral-300 rounded"
+            />
           </div>
         </div>
       </div>
     </aside>
-  );
+  )
 }
