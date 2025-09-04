@@ -11,9 +11,9 @@ export function ImageToolbar({ onNewImage, onUndo, onRedo }: ImageToolbarProps) 
 
   return (
     <div className="flex items-center justify-center pt-3 pb-3 px-4">
-      <div className="flex items-center divide-x px-2 border border-neutral-300 rounded-lg shadow-md bg-white" >
+      <div className="flex items-center items-stretch divide-x px-2 border border-neutral-300 rounded-lg shadow-md bg-white" >
         <button 
-          className="flex items-center gap-2 py-2 px-3 text-neutral-900 cursor-pointer hover:bg-neutral-50 transition-colors text-sm font-medium"
+          className="flex items-center py-2 px-3 gap-2 text-neutral-900 cursor-pointer hover:bg-neutral-50 transition-colors text-sm font-medium"
           onClick={onNewImage}
           title="Upload new image"
         >
@@ -76,7 +76,7 @@ export function ImageToolbar({ onNewImage, onUndo, onRedo }: ImageToolbarProps) 
         </button>
         
         <button 
-          className="flex items-center py-2 gap-2 px-3 text-neutral-900 cursor-pointer hover:bg-neutral-50 transition-colors text-sm font-medium"
+          className="flex items-center py-2 px-3 gap-2 text-neutral-900 cursor-pointer hover:bg-neutral-50 transition-colors text-sm font-medium"
           onMouseUp={() => setShowOriginal(false)}
           onMouseLeave={() => setShowOriginal(false)}
         >
