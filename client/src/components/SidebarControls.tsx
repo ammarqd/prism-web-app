@@ -7,7 +7,7 @@ export function SidebarControls() {
   const [saturation, setSaturation] = useState(100)
 
   return (
-    <aside className="bg-white border-r border-neutral-300 flex flex-col w-80 shadow-lg z-99">
+    <aside className="bg-white border-r border-neutral-300 flex flex-col w-80 shadow-lg z-1">
       <div className="py-8 px-6 flex flex-col gap-3">
 
         <div className="flex items-center gap-3 pb-2 border-b border-neutral-300">

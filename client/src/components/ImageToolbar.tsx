@@ -11,11 +11,11 @@ export function ImageToolbar({ onNewImage, onUndo, onRedo }: ImageToolbarProps) 
 
   return (
     <div className="flex items-center justify-center pt-3 pb-3 px-4">
-      <div className="flex items-center items-stretch divide-x px-2 border border-neutral-300 rounded-lg shadow-md bg-white" >
+      <div className="flex items-center items-stretch divide-x border border-neutral-300 rounded-lg shadow-md bg-white" >
         
         {/* New Image */}
         <button 
-          className="flex items-center py-2 px-3 gap-2 text-neutral-900 cursor-pointer hover:bg-neutral-50 transition-colors text-sm font-medium"
+          className="flex items-center py-2.5 px-4 gap-2 text-neutral-900 cursor-pointer hover:bg-neutral-50 transition-colors text-xs font-bold"
           onClick={onNewImage}
           title="Upload new image"
         >
@@ -45,7 +45,7 @@ export function ImageToolbar({ onNewImage, onUndo, onRedo }: ImageToolbarProps) 
         
         {/* Undo */}
         <button 
-          className="flex items-center py-2 px-3 text-neutral-900 cursor-pointer hover:bg-neutral-50 transition-colors text-sm font-medium"
+          className="flex items-center py-2.5 px-4 text-neutral-900 cursor-pointer hover:bg-neutral-50 transition-colors text-xs font-bold"
           onClick={onUndo}
           title="Undo"
         >
@@ -63,7 +63,7 @@ export function ImageToolbar({ onNewImage, onUndo, onRedo }: ImageToolbarProps) 
         
         {/* Redo */}
         <button 
-          className="flex items-center py-2 px-3 text-neutral-900 cursor-pointer hover:bg-neutral-50 transition-colors text-sm font-medium" 
+          className="flex items-center py-2.5 px-4 text-neutral-900 cursor-pointer hover:bg-neutral-50 transition-colors text-xs font-bold" 
           onClick={onRedo}
           title="Redo"
         >
@@ -81,7 +81,7 @@ export function ImageToolbar({ onNewImage, onUndo, onRedo }: ImageToolbarProps) 
         
         {/* Show Original */}
         <button 
-          className="flex items-center py-2 px-3 gap-2 text-neutral-900 cursor-pointer hover:bg-neutral-50 transition-colors text-sm font-medium"
+          className="flex items-center py-2.5 px-4 gap-2 text-neutral-900 cursor-pointer hover:bg-neutral-50 transition-colors text-xs font-bold"
           onMouseUp={() => setShowOriginal(false)}
           onMouseLeave={() => setShowOriginal(false)}
         >
@@ -98,8 +98,8 @@ export function ImageToolbar({ onNewImage, onUndo, onRedo }: ImageToolbarProps) 
 
         {/* Save */}
         <button
-          className="flex items-center py-2 px-3 gap-2 text-neutral-900 cursor-pointer hover:bg-neutral-50 transition-colors text-sm font-medium"
-          onClick={() => {}} // placeholder save logic
+          className="flex items-center py-2 px-4 gap-2 text-neutral-900 cursor-pointer hover:bg-neutral-50 transition-colors text-xs font-bold"
+          onClick={() => {}}
           title="Save"
         >
           <svg 

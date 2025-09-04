@@ -45,7 +45,7 @@ function App(): JSX.Element {
       <div className="flex flex-1">
         <SidebarControls />
         
-        <main className="flex flex-1 flex-col bg-white overflow-hidden" style={{ height: 'calc(100vh - 3rem)' }}>
+        <main className="flex flex-1 flex-col bg-linear-to-br from-neutral-100 to-neutral-300 overflow-hidden" style={{ height: 'calc(100vh - 3rem)' }}>
           {!image ? (
             <ImageUpload onImageChange={handleImageChange} fileInputRef={fileInputRef} />
           ) : (
