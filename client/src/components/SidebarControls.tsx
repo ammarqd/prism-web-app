@@ -63,7 +63,7 @@ export function SidebarControls() {
                   if (val < 0) val = 0
                   setHue(val)
                 }}
-                className="w-12 text-center text-xs font-semibold text-neutral-900 bg-neutral-100 border border-neutral-300 rounded"
+                className="w-12 text-center text-xs font-semibold text-neutral-900 border border-neutral-300 rounded"
               />
             </div>
           </div>
@@ -94,7 +94,7 @@ export function SidebarControls() {
                   if (val < 0) val = 0
                   setBrightness(val)
                 }}
-                className="w-12 text-center text-xs font-semibold text-neutral-900 bg-neutral-100 border border-neutral-300 rounded"
+                className="w-12 text-center text-xs font-semibold text-neutral-900 border border-neutral-300 rounded"
               />
             </div>
           </div>
@@ -125,7 +125,7 @@ export function SidebarControls() {
                   if (val < 0) val = 0
                   setContrast(val)
                 }}
-                className="w-12 text-center text-xs font-semibold text-neutral-900 bg-neutral-100 border border-neutral-300 rounded"
+                className="w-12 text-center text-xs font-semibold text-neutral-900 border border-neutral-300 rounded"
               />
             </div>
           </div>
@@ -156,7 +156,7 @@ export function SidebarControls() {
                   if (val < 0) val = 0
                   setSaturation(val)
                 }}
-                className="w-12 text-center text-xs font-semibold text-neutral-900 bg-neutral-100 border border-neutral-300 rounded"
+                className="w-12 text-center text-xs font-semibold text-neutral-900 border border-neutral-300 rounded"
               />
             </div>
           </div>
