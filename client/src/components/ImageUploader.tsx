@@ -23,7 +23,7 @@ export function ImageUpload({ onImageChange, fileInputRef }: ImageUploadProps) {
     <div className="flex flex-1 justify-center items-center">
       <input 
         type="file" 
-        accept="image/*" 
+        accept=".jpg,.jpeg,.png,.webp" 
         ref={fileInputRef} 
         className="hidden" 
         onChange={handleFileChange} 
@@ -54,7 +54,7 @@ export function ImageUpload({ onImageChange, fileInputRef }: ImageUploadProps) {
           />
         </svg>
         <p className="text-base font-medium text-neutral-900 m-0">Click or tap to upload an image</p>
-        <p className="text-sm text-neutral-600 mt-1">JPG, PNG, or GIF — max 5MB</p>
+        <p className="text-sm text-neutral-600 mt-1">JPG, PNG, or WebP — max 5MB</p>
       </div>
     </div>
   )
