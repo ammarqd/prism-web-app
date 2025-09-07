@@ -11,12 +11,28 @@ interface ImageUploadProps {
 }
 
 export function ImageUpload({ onImageChange, fileInputRef }: ImageUploadProps) {
-  const handleFileChange = (e: ChangeEvent<HTMLInputElement>): void => {
+
+  const MAX_FILE_SIZE = 5 * 1024 * 1024; // 5 MB
+  const SUPPORTED_TYPES = ["image/jpeg", "image/png", "image/webp"]
+
+  const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0]
-    if (file) {
-      const url = URL.createObjectURL(file)
-      onImageChange({ file, url })
+    if (!file) return
+
+    if (!SUPPORTED_TYPES.includes(file.type)) {
+        alert("Unsupported file type. Please upload JPG, PNG, or WebP.")
+        e.target.value = ""
+        return
     }
+
+    if (file.size > MAX_FILE_SIZE) {
+        alert("File too large! Please upload an image under 5 MB.")
+        e.target.value = ""
+        return
+    }
+
+    const url = URL.createObjectURL(file)
+    onImageChange({ file, url })
   }
 
   return (
