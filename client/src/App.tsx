@@ -1,4 +1,4 @@
-import { useState, useRef, type ChangeEvent, type JSX } from 'react'
+import { useState, useRef, type JSX } from 'react'
 import { Header } from './components/Header'
 import { SidebarControls } from './components/SidebarControls'
 import { ImageUpload } from './components/ImageUploader'
@@ -22,14 +22,6 @@ function App(): JSX.Element {
     fileInputRef.current?.click()
   }
 
-  const handleFileChange = (e: ChangeEvent<HTMLInputElement>): void => {
-    const file = e.target.files?.[0]
-    if (file) {
-      const url = URL.createObjectURL(file)
-      setImage({ file, url })
-    }
-  }
-
   const handleUndo = (): void => {
     console.log('Undo clicked')
   }
@@ -39,29 +31,21 @@ function App(): JSX.Element {
   }
 
   return (
-    <div className="h-screen flex flex-col bg-white text-neutral-900 overflow-hidden font-sans">
+    <div className="h-screen flex flex-col bg-white text-neutral-900 font-sans">
       <Header />
       
-      <div className="flex flex-1">
+      <div className="flex flex-1 min-h-0">
         <SidebarControls />
         
         <main
-          className={`flex flex-1 flex-col overflow-hidden ${
+          className={`flex flex-1 flex-col ${
             image ? 'bg-gradient-to-br from-neutral-100 to-neutral-300' : 'bg-white'
           }`}
-          style={{ height: 'calc(100vh - 3rem)' }}
         >
           {!image ? (
             <ImageUpload onImageChange={handleImageChange} fileInputRef={fileInputRef} />
           ) : (
             <>
-              <input 
-                type="file" 
-                accept="image/*" 
-                ref={fileInputRef} 
-                className="hidden" 
-                onChange={handleFileChange} 
-              />
               <ImageToolbar 
                 onNewImage={handleNewImage}
                 onUndo={handleUndo}
