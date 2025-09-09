@@ -40,7 +40,7 @@ function App(): JSX.Element {
         <SidebarControls />
        
         <main
-          className={`flex flex-1 flex-col ${
+          className={`flex flex-1 flex-col transition-colors duration-300 ${
             image ? 'bg-gradient-to-br from-neutral-100 to-neutral-300' : 'bg-white'
           }`}
         >
