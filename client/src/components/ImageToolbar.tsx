@@ -11,7 +11,7 @@ export function ImageToolbar({ onNewImage, onUndo, onRedo }: ImageToolbarProps) 
   const [showOriginal, setShowOriginal] = useState<boolean>(false)
 
   return (
-    <div className="flex items-center justify-center pt-3 pb-3 px-4">
+    <div className="flex items-center justify-center pt-3 pb-3 px-4 animate-fadeSlideDown">
       <div className="flex items-center items-stretch divide-x border border-neutral-300 rounded-lg shadow-sm bg-white overflow-hidden" >
         
         {/* New Image */}
