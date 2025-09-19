@@ -36,7 +36,7 @@ function App(): JSX.Element {
         onChange={handleFileChange}
       />
      
-      <div className="flex flex-1 min-h-0">
+      <div className="flex flex-1 overflow-hidden">
         <SidebarControls />
        
         <main
