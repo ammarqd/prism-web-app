@@ -1,4 +1,4 @@
-# 🖼️ PRISM
+# PRISM
 A full-stack web app for enhancing and transforming your images with powerful filters.  
 
 ## ✨ Features
