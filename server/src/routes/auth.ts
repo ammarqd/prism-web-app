@@ -70,4 +70,39 @@ router.post('/register', async (req: Request, res: Response) => {
   }
 })
 
+router.post('/login', async (req: Request, res: Response) => {
+  try {
+    const { email, password } = req.body
+
+    if (!email || !password) {
+      return res.status(400).json({
+        success: false,
+        message: 'Email and password are required'
+      })
+    }
+
+    const result = await pool.query(
+      'SELECT id, email, password_hash FROM users WHERE email = $1', 
+      [email.toLowerCase()]
+    )
+
+    if (result.rows.length === 0) {
+      return res.status(401).json({
+        success: false,
+        message: 'Invalid email or password'
+      })
+    } 
+
+    const user = result.rows[0]
+    const isValidPassword = await bcrypt.compare(password, user.password_hash)
+    
+  } catch (error) {
+    console.error('Login error', error)
+    res.status(500).json({
+      success: false,
+      message: 'Server error'
+    })
+  }
+})
+
 export default router
