@@ -3,35 +3,56 @@ import { AuthDialog } from './AuthDialog'
 
 export function Header() {
   const [authOpen, setAuthOpen] = useState(false)
+  const [isLoggedIn, setIsLoggedIn] = useState(() => {
+    return !!localStorage.getItem('token')
+  })
+
+  const handleLogout = () => {
+    localStorage.removeItem('token')
+    setTimeout(() => window.location.reload(), 300)
+  }
+
+  const handleLoginSuccess = () => {
+    setIsLoggedIn(true)
+  }
 
   return (
     <header className="h-12 flex items-center justify-between py-2 px-4 bg-white border-b border-neutral-300">
       <h1 className="text-xl font-semibold tracking-widest uppercase text-neutral-900">PRISM</h1>
 
       <nav>
-        <button
-          className="flex items-center gap-2 font-medium text-sm py-2 px-5 rounded-full border border-neutral-300 bg-white cursor-pointer transition-colors hover:bg-neutral-50"
-          onClick={() => setAuthOpen(true)}
-        >
-          Log In
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            className="w-5 h-5 transform scale-x-[-1]"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-            strokeWidth={2}
-            aria-hidden="true"
+        {!isLoggedIn? (
+          <button
+            className="flex items-center gap-2 font-medium text-sm py-2 px-5 rounded-full border border-neutral-300 bg-white cursor-pointer transition-colors hover:bg-neutral-50"
+            onClick={() => setAuthOpen(true)}
           >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1"
-            />
-          </svg>
-        </button>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="w-5 h-5 transform scale-x-[-1]"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              strokeWidth={2}
+              aria-hidden="true"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1"
+              />
+            </svg>
+            Log In
+          </button>
+        ) : (
+          <button
+            className="flex items-center gap-2 font-medium text-sm py-2 px-5 rounded-full border border-neutral-300 bg-white cursor-pointer transition-colors hover:bg-neutral-50"
+            onClick={handleLogout}
+          >
+            Log Out
+          </button>
+        )}
 
-        <AuthDialog isOpen={authOpen} onOpenChange={setAuthOpen} />
+        <AuthDialog isOpen={authOpen} onOpenChange={setAuthOpen} onLoginSuccess={handleLoginSuccess} />
       </nav>
     </header>
   )

@@ -11,9 +11,10 @@ import { Input } from '@/components/ui/input'
 interface AuthDialogProps {
   isOpen: boolean
   onOpenChange: (open: boolean) => void
+  onLoginSuccess: () => void
 }
 
-export function AuthDialog({ isOpen, onOpenChange }: AuthDialogProps) {
+export function AuthDialog({ isOpen, onOpenChange, onLoginSuccess }: AuthDialogProps) {
   const [isRegister, setIsRegister] = useState(false)
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
@@ -44,6 +45,8 @@ export function AuthDialog({ isOpen, onOpenChange }: AuthDialogProps) {
       }
 
       localStorage.setItem('token', data.token)
+
+      onLoginSuccess()
       onOpenChange(false)
       
       setEmail('')
