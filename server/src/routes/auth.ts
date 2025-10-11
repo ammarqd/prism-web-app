@@ -2,6 +2,7 @@ import { Router, Request, Response } from 'express'
 import bcrypt from 'bcrypt'
 import validator from 'validator'
 import pool from '../config/db'
+import jwt from 'jsonwebtoken'
 
 const router = Router()
 
@@ -95,6 +96,29 @@ router.post('/login', async (req: Request, res: Response) => {
 
     const user = result.rows[0]
     const isValidPassword = await bcrypt.compare(password, user.password_hash)
+
+    if (!isValidPassword) {
+      return res.status(401).json({
+        success: false,
+        message: 'Invalid email or password'
+      })
+    }
+
+    const token = jwt.sign(
+      { userId: user.id, email: user.email },
+      process.env.JWT_SECRET!,
+      { expiresIn: '7d' }
+    )
+
+    res.status(200).json({
+      success: true,
+      message: 'Login successful!',
+      token,
+      user: {
+        id: user.id,
+        email: user.email
+      }
+    })
     
   } catch (error) {
     console.error('Login error', error)
